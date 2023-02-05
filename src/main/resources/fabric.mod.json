@@ -20,7 +20,7 @@
     "tihr.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.14.14",
+    "fabricloader": "*",
     "minecraft": "1.19.3"
   }
 }
