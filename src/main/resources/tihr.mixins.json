@@ -1,0 +1,23 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "hu.bendi.tihr.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "RecipeBookMixin",
+    "ServerRecipeBookMixin"
+  ],
+  "client": [
+    "AbstractFurnaceScreenMixin",
+    "CraftingScreenMixin",
+    "ExperimentalWarningScreenMixin",
+    "GameOptionsMixin",
+    "InventoryScreenMixin",
+    "RecipeBookWidgetMixin",
+    "ToastManagerMixin",
+    "TutorialManagerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

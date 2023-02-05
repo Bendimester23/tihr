@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "tihr",
+  "version": "${version}",
+  "name": "Tihr",
+  "description": "Removes features from the game that aren't used.",
+  "authors": [
+    "Bendi"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/tihr/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "hu.bendi.tihr.Tihr"
+    ]
+  },
+  "mixins": [
+    "tihr.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.14",
+    "minecraft": "1.19.3"
+  }
+}
