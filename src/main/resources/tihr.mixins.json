@@ -16,6 +16,8 @@
     "GameOptionsMixin",
     "InventoryScreenMixin",
     "RecipeBookWidgetMixin",
+    "ResourcePackEntryMixin",
+    "TelemetryManagerMixin",
     "ToastManagerMixin",
     "TutorialManagerMixin"
   ],

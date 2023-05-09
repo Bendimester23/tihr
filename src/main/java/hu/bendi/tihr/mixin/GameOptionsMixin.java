@@ -27,10 +27,13 @@ public class GameOptionsMixin {
 
     @Shadow @Final private Map<SoundCategory, SimpleOption<Double>> soundVolumeLevels;
 
+    @Shadow @Final private SimpleOption<Integer> guiScale;
+
     @Inject(method = "<init>", at = @At("TAIL"))
     public void init$skipMultiplayerDisclaimer(MinecraftClient client, File optionsFile, CallbackInfo ci) {
         this.skipMultiplayerWarning = true;
         this.tutorialStep = TutorialStep.NONE;
+        this.guiScale.setValue(2);
         try {
             if (new File(client.runDirectory, "tihr-ran-before").createNewFile()) {
                 this.autoJump.setValue(false);
