@@ -1,7 +1,7 @@
 package hu.bendi.tihr.mixin;
 
 import com.mojang.text2speech.Narrator;
-import com.mojang.text2speech.NarratorDummy;
+import hu.bendi.tihr.NarratorDummy;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
@@ -13,7 +13,7 @@ public interface NarratorMixin {
      * @reason yes
      */
     @Overwrite
-    public static Narrator getNarrator() {
+    static Narrator getNarrator() {
         return new NarratorDummy();
     }
 }
