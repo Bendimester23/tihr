@@ -18,16 +18,16 @@ import java.io.IOException;
 import java.util.Map;
 
 @Mixin(GameOptions.class)
-public class GameOptionsMixin {
+public abstract class GameOptionsMixin {
     @Shadow public boolean skipMultiplayerWarning;
 
     @Shadow public TutorialStep tutorialStep;
 
     @Shadow @Final private SimpleOption<Boolean> autoJump;
 
-    @Shadow @Final private Map<SoundCategory, SimpleOption<Double>> soundVolumeLevels;
-
     @Shadow @Final private SimpleOption<Integer> guiScale;
+
+    @Shadow public abstract void setSoundVolume(SoundCategory category, float volume);
 
     @Inject(method = "<init>", at = @At("TAIL"))
     public void init$skipMultiplayerDisclaimer(MinecraftClient client, File optionsFile, CallbackInfo ci) {
@@ -37,7 +37,7 @@ public class GameOptionsMixin {
         try {
             if (new File(client.runDirectory, "tihr-ran-before").createNewFile()) {
                 this.autoJump.setValue(false);
-                this.soundVolumeLevels.get(SoundCategory.MUSIC).setValue(0.0d);
+                this.setSoundVolume(SoundCategory.MUSIC, 0.0f);
             }
         } catch (IOException e) {
             Tihr.LOGGER.error("Failed to create file {}.", e.getMessage());

@@ -1,19 +1,18 @@
 package hu.bendi.tihr.mixin;
 
-import net.minecraft.client.util.telemetry.TelemetryManager;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.telemetry.TelemetrySender;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
-@Mixin(TelemetryManager.class)
-public class TelemetryManagerMixin {
-
+@Mixin(MinecraftClient.class)
+public class MinecraftClientMixin {
     /**
      * @author Bendi
-     * @reason Telemetry bad
+     * @reason we don't need telemetry
      */
     @Overwrite
-    private TelemetrySender getSender() {
-        return TelemetrySender.NOOP;
+    public TelemetrySender createTelemetrySender() {
+        return null;
     }
 }

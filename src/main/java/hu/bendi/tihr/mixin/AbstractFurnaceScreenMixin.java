@@ -98,4 +98,13 @@ public abstract class AbstractFurnaceScreenMixin<T extends AbstractFurnaceScreen
     public void refreshRecipeBook() {
 
     }
+
+    /**
+     * @author Bendi
+     * @reason the game crashes without this
+     */
+    @Overwrite
+    public void removed() {
+        super.removed();
+    }
 }

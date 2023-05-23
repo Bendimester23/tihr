@@ -89,4 +89,13 @@ public abstract class CraftingScreenMixin extends HandledScreen<CraftingScreenHa
     public void refreshRecipeBook() {
 
     }
+
+    /**
+     * @author Bendi
+     * @reason the game crashes without this
+     */
+    @Overwrite
+    public void removed() {
+        super.removed();
+    }
 }

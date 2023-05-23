@@ -34,7 +34,7 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
     @Overwrite
     public void init() {
         if (this.client.interactionManager.hasCreativeInventory()) {
-            this.client.setScreen(new CreativeInventoryScreen(this.client.player, this.client.player.networkHandler.getEnabledFeatures(), this.client.options.getOperatorItemsTab().getValue()));
+            this.client.setScreen(new CreativeInventoryScreen(this.client.player));
         } else {
             super.init();
             this.narrow = this.width < 379;
@@ -99,7 +99,16 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
     @Overwrite
     public void handledScreenTick() {
         if (this.client.interactionManager.hasCreativeInventory()) {
-            this.client.setScreen(new CreativeInventoryScreen(this.client.player, this.client.player.networkHandler.getEnabledFeatures(), this.client.options.getOperatorItemsTab().getValue()));
+            this.client.setScreen(new CreativeInventoryScreen(this.client.player));
         }
+    }
+
+    /**
+     * @author Bendi
+     * @reason the game crashes without this
+     */
+    @Overwrite
+    public void removed() {
+        super.removed();
     }
 }
