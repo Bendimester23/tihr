@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger;
 
 public class Tihr implements ModInitializer {
 
-    public static Logger LOGGER = LogManager.getLogger("TIHR");
+    public static final Logger LOGGER = LogManager.getLogger("TIHR");
 
     @Override
     public void onInitialize() {

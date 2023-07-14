@@ -15,7 +15,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
 
 @Mixin(GameOptions.class)
 public abstract class GameOptionsMixin {
@@ -33,7 +32,7 @@ public abstract class GameOptionsMixin {
     public void init$skipMultiplayerDisclaimer(MinecraftClient client, File optionsFile, CallbackInfo ci) {
         this.skipMultiplayerWarning = true;
         this.tutorialStep = TutorialStep.NONE;
-        this.guiScale.setValue(2);
+        if (this.guiScale.getValue() == 0) this.guiScale.setValue(2);
         try {
             if (new File(client.runDirectory, "tihr-ran-before").createNewFile()) {
                 this.autoJump.setValue(false);
