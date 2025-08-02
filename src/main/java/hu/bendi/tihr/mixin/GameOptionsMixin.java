@@ -23,8 +23,6 @@ public class GameOptionsMixin {
 
     @Shadow public TutorialStep tutorialStep;
 
-    @Shadow @Final private SimpleOption<Boolean> autoJump;
-
     @Shadow @Final private Map<SoundCategory, SimpleOption<Double>> soundVolumeLevels;
 
     @Shadow @Final private SimpleOption<Integer> guiScale;
@@ -36,7 +34,6 @@ public class GameOptionsMixin {
         this.guiScale.setValue(2);
         try {
             if (new File(client.runDirectory, "tihr-ran-before").createNewFile()) {
-                this.autoJump.setValue(false);
                 this.soundVolumeLevels.get(SoundCategory.MUSIC).setValue(0.0d);
             }
         } catch (IOException e) {

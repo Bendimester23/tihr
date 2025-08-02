@@ -1,8 +1,10 @@
 package hu.bendi.tihr.mixin;
 
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
+import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.screen.PlayerScreenHandler;
@@ -21,8 +23,6 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
 
     @Shadow private boolean narrow;
 
-    @Shadow private boolean open;
-
     public InventoryScreenMixin(PlayerScreenHandler screenHandler, PlayerInventory playerInventory, Text text) {
         super(screenHandler, playerInventory, text);
     }
@@ -34,12 +34,15 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
     @Overwrite
     public void init() {
         if (this.client.interactionManager.hasCreativeInventory()) {
-            this.client.setScreen(new CreativeInventoryScreen(this.client.player, this.client.player.networkHandler.getEnabledFeatures(), this.client.options.getOperatorItemsTab().getValue()));
+            this.client
+                    .setScreen(
+                            new CreativeInventoryScreen(
+                                    this.client.player, this.client.player.networkHandler.getEnabledFeatures(), this.client.options.getOperatorItemsTab().getValue()
+                            )
+                    );
         } else {
             super.init();
             this.narrow = this.width < 379;
-            this.open = true;
-            this.x = (this.width - this.backgroundWidth) / 2;
         }
     }
 
@@ -48,13 +51,12 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
      * @reason Remove references to recipe book
      */
     @Overwrite
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        this.renderBackground(matrices);
-        super.render(matrices, mouseX, mouseY, delta);
-
-        this.drawMouseoverTooltip(matrices, mouseX, mouseY);
-        this.mouseX = (float)mouseX;
-        this.mouseY = (float)mouseY;
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        this.renderBackground(context);
+        super.render(context, mouseX, mouseY, delta);
+        this.drawMouseoverTooltip(context, mouseX, mouseY);
+        this.mouseX = mouseX;
+        this.mouseY = mouseY;
     }
 
     /**

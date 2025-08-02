@@ -13,7 +13,7 @@ public class TelemetryManagerMixin {
      * @reason Telemetry bad
      */
     @Overwrite
-    private TelemetrySender getSender() {
+    public TelemetrySender getSender() {
         return TelemetrySender.NOOP;
     }
 }

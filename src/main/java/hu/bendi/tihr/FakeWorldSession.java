@@ -9,7 +9,7 @@ import java.time.Duration;
 
 public class FakeWorldSession extends WorldSession {
     public FakeWorldSession(TelemetrySender sender, boolean newWorld, @Nullable Duration worldLoadTime) {
-        super(sender, newWorld, worldLoadTime);
+        super(sender, newWorld, worldLoadTime, "");
     }
 
     @Override

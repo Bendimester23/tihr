@@ -1,5 +1,6 @@
 package hu.bendi.tihr.mixin;
 
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.AbstractFurnaceScreen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.util.math.MatrixStack;
@@ -32,19 +33,6 @@ public abstract class AbstractFurnaceScreenMixin<T extends AbstractFurnaceScreen
         this.titleX = (this.backgroundWidth - this.textRenderer.getWidth(this.title)) / 2;
     }
 
-
-    /**
-     * @author Bendi
-     * @reason yes
-     */
-    @Overwrite
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        this.renderBackground(matrices);
-        super.render(matrices, mouseX, mouseY, delta);
-
-        this.drawMouseoverTooltip(matrices, mouseX, mouseY);
-    }
-
     /**
      * @author Bendi
      * @reason yes
@@ -52,6 +40,17 @@ public abstract class AbstractFurnaceScreenMixin<T extends AbstractFurnaceScreen
     @Overwrite
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         return  super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    /**
+     * @author Bendi
+     * @reason don't render recipe book
+     */
+    @Overwrite
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        this.renderBackground(context);
+        super.render(context, mouseX, mouseY, delta);
+        this.drawMouseoverTooltip(context, mouseX, mouseY);
     }
 
     /**
